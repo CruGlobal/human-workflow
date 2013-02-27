@@ -8,12 +8,12 @@ Get started quickly using our most cutting edge stack!
 * JAX-RS (EE6)
 * CDI (EE6)
 * Hibernate
+* Google Guava
+* Google Gson
 * AngularJS
 * Twitter Bootstrap
 * HTML5 Boilerplate
 * Font Awesome
-* Google Guava
-* Google Gson
 * underscore.js
 
 ## Up and Running with Hello World
