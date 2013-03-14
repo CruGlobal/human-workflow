@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestScoped
 public class SsoGuidFromSession implements SsoGuid {
 
-    @Inject @RequestScoped
+    @Inject
     HttpServletRequest request;
 
     @Override
