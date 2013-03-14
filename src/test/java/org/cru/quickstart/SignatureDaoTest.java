@@ -3,8 +3,6 @@ package org.cru.quickstart;
 import org.cru.webapps.interrupt.Resources;
 import org.cru.webapps.interrupt.sua.Signature;
 import org.cru.webapps.interrupt.sua.SignatureDao;
-import org.cru.webapps.interrupt.sua.SystemsUseAgreement;
-import org.cru.webapps.interrupt.sua.auth.SsoGuid;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -45,6 +43,15 @@ public class SignatureDaoTest extends Arquillian {
     @Test
     public void shouldNotInterrupt() {
         String ssoGuid = "abc-123";
+
+        Assert.assertFalse(signatureDao.shouldInterrupt(ssoGuid));
+    }
+
+    @Test
+    public void shouldSaveSignature() throws Exception {
+        String ssoGuid = "def-456";
+
+        signatureDao.saveSignature(ssoGuid);
 
         Assert.assertFalse(signatureDao.shouldInterrupt(ssoGuid));
     }

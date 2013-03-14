@@ -1,16 +1,18 @@
 package org.cru.webapps.interrupt.sua;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
-import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 //@UniqueConstraint(columnNames = "ssoGuid")
 public class Signature {
 
     @Id
-    @GeneratedValue(strategy = AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String ssoGuid;
     private Boolean signed;
