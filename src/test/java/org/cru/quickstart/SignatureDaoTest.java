@@ -1,6 +1,10 @@
 package org.cru.quickstart;
 
-import org.cru.quickstart.webservices.HelloWorld;
+import org.cru.webapps.interrupt.Resources;
+import org.cru.webapps.interrupt.sua.Signature;
+import org.cru.webapps.interrupt.sua.SignatureDao;
+import org.cru.webapps.interrupt.sua.SystemsUseAgreement;
+import org.cru.webapps.interrupt.sua.auth.SsoGuid;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -13,7 +17,7 @@ import org.testng.annotations.Test;
 
 import javax.inject.Inject;
 
-public class HelloTest extends Arquillian {
+public class SignatureDaoTest extends Arquillian {
     @Deployment
     public static WebArchive createTestArchive() {
         MavenDependencyResolver resolver = DependencyResolvers
@@ -21,14 +25,19 @@ public class HelloTest extends Arquillian {
                 .loadMetadataFromPom("pom.xml");
 
         return ShrinkWrap.create(WebArchive.class)
-                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsWebInfResource("h2-ds.xml", "h2-ds.xml")
+                .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+                .addClasses(Resources.class, Signature.class, SignatureDao.class);
     }
 
     @Inject
-    HelloWorld helloWorld;
+    SignatureDao signatureDao;
 
     @Test
-    public void simpleTest() {
-        Assert.assertEquals(helloWorld.getStarted(), "Hello World!");
+    public void shouldInterrupt() {
+        String ssoGuid = "neverSeenBefore";
+
+        Assert.assertTrue(signatureDao.shouldInterrupt(ssoGuid));
     }
 }
