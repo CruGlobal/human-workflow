@@ -60,6 +60,18 @@
 
         <!-- Import internal libraries -->
 
+        <dependency>
+            <groupId>org.ccci</groupId>
+            <artifactId>casclient-ccci</artifactId>
+            <version>2.1.0-20120214-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.cru</groupId>
+            <artifactId>cdi-http-servlet</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- Import the APIs that we depend on and are included in JBoss AS 7 -->
         <dependency>
             <groupId>javax.enterprise</groupId>
