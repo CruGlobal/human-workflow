@@ -15,7 +15,6 @@ public class Signature {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String ssoGuid;
-    private Boolean signed;
     private Date dateSigned;
 
     public Long getId() {
@@ -32,14 +31,6 @@ public class Signature {
 
     public void setSsoGuid(String ssoGuid) {
         this.ssoGuid = ssoGuid;
-    }
-
-    public Boolean getSigned() {
-        return signed;
-    }
-
-    public void setSigned(Boolean signed) {
-        this.signed = signed;
     }
 
     public Date getDateSigned() {
