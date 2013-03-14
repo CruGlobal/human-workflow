@@ -28,6 +28,7 @@ public class SignatureDaoTest extends Arquillian {
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource("h2-ds.xml", "h2-ds.xml")
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+                .addAsResource("import.sql")
                 .addClasses(Resources.class, Signature.class, SignatureDao.class);
     }
 
@@ -39,5 +40,12 @@ public class SignatureDaoTest extends Arquillian {
         String ssoGuid = "neverSeenBefore";
 
         Assert.assertTrue(signatureDao.shouldInterrupt(ssoGuid));
+    }
+
+    @Test
+    public void shouldNotInterrupt() {
+        String ssoGuid = "abc-123";
+
+        Assert.assertFalse(signatureDao.shouldInterrupt(ssoGuid));
     }
 }
