@@ -36,7 +36,7 @@ public class SystemsUseAgreement {
 
     @GET
     public String test() {
-        return ssoGuid.getSsoGuid();
+        return ssoGuid.get();
     }
 
 }

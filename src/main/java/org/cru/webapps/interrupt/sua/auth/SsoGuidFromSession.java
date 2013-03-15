@@ -4,19 +4,20 @@ import edu.yale.its.tp.cas.client.CASReceipt;
 import edu.yale.its.tp.cas.client.filter.CASFilter;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 @RequestScoped
-public class SsoGuidFromSession implements SsoGuid {
+public class SsoGuidFromSession {
 
     @Inject
     HttpServletRequest request;
 
-    @Override
-    public String getSsoGuid() {
+    @Produces
+    public SsoGuid getSsoGuid() {
         if (isAuthenticatedViaCas(request))
-            return (String) getCasReceipt(request).getAttributes().get("ssoGuid");
+            return SsoGuid.valueOf((String) getCasReceipt(request).getAttributes().get("ssoGuid"));
         else
             throw new RuntimeException("not auth");
     }
