@@ -2,11 +2,22 @@
 (function () {
   'use strict';
 
-  angular.module('cru-quickstart', [])
-    .controller('HelloWorldController',
+  angular.module('human-workflow', [])
+    .config(['$routeProvider', function ($routeProvider) {
+      $routeProvider
+        .when('/systems-use-agreement',
+        {
+          templateUrl:'sua.html',
+          controller:'SuaController'
+        })
+        .otherwise({redirectTo:'/systems-use-agreement'});
+    }])
+    .controller('SuaController',
       ['$scope', '$http',
-        function($scope, $http) {
-          $scope.message = $http.get('api/');
+        function(scope) {
+
+          scope.license = 'paid.html';
+
         }
       ]
     );
