@@ -40,7 +40,7 @@ public class SystemsUseAgreement {
 
     @GET
     @Path("signature")
-    public String hasSignedAgreement() {
+    public String mustSignAgreement() {
         return new Gson().toJson(signatureDao.shouldSign(ssoGuid));
     }
 
