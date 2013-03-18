@@ -54,6 +54,13 @@ public class SignatureDaoTest extends Arquillian {
     }
 
     @Test
+    public void shouldInterruptOld() {
+        final SsoGuid ssoGuid = SsoGuid.valueOf("old-987");
+
+        Assert.assertTrue(signatureDao.shouldSign(ssoGuid));
+    }
+
+    @Test
     public void shouldSaveSignature() throws Exception {
         final SsoGuid ssoGuid = SsoGuid.valueOf("def-456");
 
