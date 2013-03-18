@@ -29,7 +29,7 @@ public class SignatureDao {
         //TODO add expiration time here
         final List<Signature> resultList = em.createQuery("select s from Signature s " +
                 "where s.ssoGuid = :ssoGuid", Signature.class)
-                .setParameter("ssoGuid", ssoGuid)
+                .setParameter("ssoGuid", ssoGuid.get())
                 .getResultList();
         return resultList.isEmpty();
     }
