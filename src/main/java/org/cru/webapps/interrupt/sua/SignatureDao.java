@@ -25,7 +25,7 @@ public class SignatureDao {
         return signature;
     }
 
-    public boolean shouldSign(String ssoGuid) {
+    public boolean shouldSign(SsoGuid ssoGuid) {
         //TODO add expiration time here
         final List<Signature> resultList = em.createQuery("select s from Signature s " +
                 "where s.ssoGuid = :ssoGuid", Signature.class)
