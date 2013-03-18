@@ -1,5 +1,6 @@
 package org.cru.webapps.interrupt.sua;
 
+import com.google.gson.Gson;
 import org.cru.webapps.interrupt.sua.auth.SsoGuid;
 
 import javax.inject.Inject;
@@ -35,6 +36,12 @@ public class SystemsUseAgreement {
         signatureDao.saveSignature(ssoGuid);
 
         return "OK";
+    }
+
+    @GET
+    @Path("signature")
+    public String hasSignedAgreement() {
+        return new Gson().toJson(signatureDao.shouldSign(ssoGuid));
     }
 
     @GET
