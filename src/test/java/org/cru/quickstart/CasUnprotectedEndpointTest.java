@@ -52,6 +52,5 @@ public class CasUnprotectedEndpointTest extends Arquillian {
         Assert.assertEquals(response.getStatus(), 200);
 
         Assert.assertTrue(response.getEntity());
-
     }
 }
