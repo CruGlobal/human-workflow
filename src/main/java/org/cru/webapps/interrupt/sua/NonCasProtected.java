@@ -16,6 +16,7 @@ public class NonCasProtected {
     @GET
     @Path("/{ssoGuid}")
     public boolean shouldInterrupt(@PathParam("ssoGuid") String ssoGuid) {
+        //TODO secure with encrypted properties
         return signatureDao.shouldSign(SsoGuid.valueOf(ssoGuid));
     }
 }

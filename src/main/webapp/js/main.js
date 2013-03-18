@@ -31,6 +31,8 @@
 
           var sign = resource(endpoint + 'api/sua/signature');
 
+          // TODO set signed to true if the webservice returns false
+
           scope.signAgreement = function() {
             sign.save(function() {
               scope.signed = true;
