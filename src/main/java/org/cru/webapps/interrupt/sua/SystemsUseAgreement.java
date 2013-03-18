@@ -13,6 +13,9 @@ public class SystemsUseAgreement {
     @Inject
     SsoGuid ssoGuid;
 
+    @Inject
+    SignatureDao signatureDao;
+
     @GET
     @Path("license")
     public String getLicense() {
@@ -29,7 +32,7 @@ public class SystemsUseAgreement {
     @Path("signature")
     public String signAgreement() {
 
-        // TODO record the signature
+        signatureDao.saveSignature(ssoGuid);
 
         return "OK";
     }
