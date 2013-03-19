@@ -13,8 +13,10 @@
         .otherwise({redirectTo:'/systems-use-agreement'});
     }])
     .controller('SuaController',
-      ['$scope', '$resource', '$routeParams',
-        function(scope, resource, routeParams) {
+      ['$scope', '$resource', '$routeParams', '$window',
+        function(scope, resource, routeParams, window) {
+
+          scope.returnUrl = routeParams.returnUrl;
 
           var endpoint = 'http://localhost\\:8080/interrupt-webapp/';
 
@@ -40,12 +42,14 @@
           scope.signAgreement = function() {
             signature.save(function() {
               scope.signed = true;
-              if(!_.isUndefined(routeParams.returnUrl))
-                window.location = routeParams.returnUrl;
+              if(!_.isUndefined(scope.returnUrl))
+                redirectTo(scope.returnUrl)
             })
           }
 
-
+          var redirectTo = function(url) {
+            window.location = url;
+          }
 
         }
       ]
