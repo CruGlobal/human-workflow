@@ -31,10 +31,11 @@
           var signature = resource(endpoint + 'api/sua/signature');
 
           signature.query(function(response) {
-            scope.pastSignature = _.first(response);
+            if (_.isArray(response)) {
+              scope.pastSignature = _.first(response);
+              scope.signed = response.length > 0;
+            }
           });
-
-          // TODO set signed to true if the webservice returns false
 
           scope.signAgreement = function() {
             signature.save(function() {
