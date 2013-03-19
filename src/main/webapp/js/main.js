@@ -21,7 +21,6 @@
           var userType = resource(endpoint + 'api/sua/userType');
 
           userType.get(function(response) {
-            console.log(response);
             if(response.type === 'supported') {
               scope.license = 'supported.html';
             } else {
@@ -29,12 +28,16 @@
             }
           })
 
-          var sign = resource(endpoint + 'api/sua/signature');
+          var signature = resource(endpoint + 'api/sua/signature');
+
+          signature.query(function(response) {
+            scope.pastSignature = _.first(response);
+          });
 
           // TODO set signed to true if the webservice returns false
 
           scope.signAgreement = function() {
-            sign.save(function() {
+            signature.save(function() {
               scope.signed = true;
               if(!_.isUndefined(routeParams.returnUrl))
                 window.location = routeParams.returnUrl;

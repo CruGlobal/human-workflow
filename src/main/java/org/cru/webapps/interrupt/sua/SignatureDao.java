@@ -26,7 +26,7 @@ public class SignatureDao {
         return signature;
     }
 
-    public boolean shouldSign(SsoGuid ssoGuid) {
+    public List<Signature> validSignatures(SsoGuid ssoGuid) {
         final Calendar date = Calendar.getInstance();
         date.add(Calendar.YEAR, -1);
 
@@ -34,12 +34,14 @@ public class SignatureDao {
                 "where s.ssoGuid = :ssoGuid " +
                 "and s.dateSigned > :aYearAgo " +
                 "and s.dateSigned is not null ";
-        final List<Signature> resultList = em.createQuery(qlString, Signature.class)
+        return em.createQuery(qlString, Signature.class)
                 .setParameter("ssoGuid", ssoGuid.get())
                 .setParameter("aYearAgo", date.getTime())
                 .getResultList();
+    }
 
-        return resultList.isEmpty();
+    public boolean shouldSign(SsoGuid ssoGuid) {
+        return validSignatures(ssoGuid).isEmpty();
     }
 
 }

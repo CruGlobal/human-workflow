@@ -18,7 +18,7 @@ public class SystemsUseAgreement {
     SignatureDao signatureDao;
 
     @GET
-    @Path("license")
+    @Path("userType")
     public String getLicense() {
 
         // haven't decided what's best to return from here
@@ -40,8 +40,8 @@ public class SystemsUseAgreement {
 
     @GET
     @Path("signature")
-    public String mustSignAgreement() {
-        return new Gson().toJson(signatureDao.shouldSign(ssoGuid));
+    public String getValidSignature() {
+        return new Gson().toJson(signatureDao.validSignatures(ssoGuid));
     }
 
     @GET
