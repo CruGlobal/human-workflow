@@ -1,20 +1,22 @@
 <div class="row-fluid">
-    <div class="span8 offset2">
-<h1>Cru Systems Use Agreement</h1>
-<div data-ng-include="license"></div>
-    </div>
-    </div>
+  <div class="span8 offset2">
+    <h1>Cru Systems Use Agreement</h1>
+
+    <div data-ng-include="license"></div>
+  </div>
+</div>
 <div class="row-fluid">
-    <div class="span8 offset2">
-<button class="btn btn-primary"
-        data-ng-click="signAgreement()"
-        data-ng-disabled="signed">Sign Agreement</button>
+  <div class="span8 offset2">
+    <button class="btn btn-primary"
+            data-ng-click="signAgreement()"
+            data-ng-disabled="signed">Sign Agreement
+    </button>
 
-<!-- TODO better styling -->
-<span data-ng-show="signed">Thanks for signing!</span>
+    <!-- TODO better styling -->
+    <span data-ng-show="signed">Thanks for signing!</span>
 
-<span data-ng-show="pastSignature">You signed on {{pastSignature.dateSigned}}. Thanks!</span>
+    <span data-ng-show="pastSignature">You signed on {{pastSignature.dateSigned}}. Thanks!</span>
 
-<!-- TODO If redirectUrl exists, show a button to continue on to that page -->
-    </div>
+    <!-- TODO If redirectUrl exists, show a button to continue on to that page -->
+  </div>
 </div>
