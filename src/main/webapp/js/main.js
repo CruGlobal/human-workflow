@@ -18,9 +18,7 @@
 
           scope.returnUrl = routeParams.returnUrl;
 
-          var endpoint = 'http://localhost\\:8080/interrupt-webapp/';
-
-          var userType = resource(endpoint + 'api/sua/userType');
+          var userType = resource('api/sua/userType');
 
           userType.get(function(response) {
             if(response.type === 'supported') {
@@ -30,7 +28,7 @@
             }
           })
 
-          var signature = resource(endpoint + 'api/sua/signature');
+          var signature = resource('api/sua/signature');
 
           signature.query(function(response) {
             if (_.isArray(response)) {
