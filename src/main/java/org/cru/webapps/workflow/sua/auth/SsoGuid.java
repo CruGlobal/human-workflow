@@ -1,4 +1,4 @@
-package org.cru.webapps.interrupt.sua.auth;
+package org.cru.webapps.workflow.sua.auth;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;

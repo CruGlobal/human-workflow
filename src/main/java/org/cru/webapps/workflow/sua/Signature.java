@@ -1,4 +1,4 @@
-package org.cru.webapps.interrupt.sua;
+package org.cru.webapps.workflow.sua;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

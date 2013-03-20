@@ -1,4 +1,4 @@
-package org.cru.webapps.interrupt;
+package org.cru.webapps.workflow;
 
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;

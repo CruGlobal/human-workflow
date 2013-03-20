@@ -17,7 +17,7 @@
    xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
    <!-- The datasource is bound into JNDI at this location. We reference 
       this in META-INF/persistence.xml -->
-   <datasource jndi-name="java:jboss/datasources/interruptDS"
+   <datasource jndi-name="java:jboss/datasources/humanWorkflowDS"
       pool-name="h2"
       enabled="true"
       use-java-context="true">

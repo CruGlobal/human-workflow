@@ -1,11 +1,11 @@
 package org.cru.quickstart;
 
-import org.cru.webapps.interrupt.App;
-import org.cru.webapps.interrupt.Resources;
-import org.cru.webapps.interrupt.sua.NonCasProtected;
-import org.cru.webapps.interrupt.sua.Signature;
-import org.cru.webapps.interrupt.sua.SignatureDao;
-import org.cru.webapps.interrupt.sua.auth.SsoGuid;
+import org.cru.webapps.workflow.App;
+import org.cru.webapps.workflow.Resources;
+import org.cru.webapps.workflow.sua.NonCasProtected;
+import org.cru.webapps.workflow.sua.Signature;
+import org.cru.webapps.workflow.sua.SignatureDao;
+import org.cru.webapps.workflow.sua.auth.SsoGuid;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.resteasy.client.ClientRequest;
@@ -45,7 +45,7 @@ public class CasUnprotectedEndpointTest extends Arquillian {
     }
 
     @Test
-    public void shouldInterrupt() throws Exception {
+    public void shouldBeRequiredToRedirect() throws Exception {
         ClientRequest request = new ClientRequest("http://localhost:8080/non-cas-endpoint/api/non-cas/aoeu");
         request.accept("application/json");
         final ClientResponse<Boolean> response = request.get(Boolean.class);

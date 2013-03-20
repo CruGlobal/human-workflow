@@ -1,4 +1,4 @@
-package org.cru.webapps.interrupt;
+package org.cru.webapps.workflow;
 
 import javax.ws.rs.ApplicationPath;
 

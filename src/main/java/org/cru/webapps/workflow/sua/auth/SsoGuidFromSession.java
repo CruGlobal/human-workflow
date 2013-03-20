@@ -1,4 +1,4 @@
-package org.cru.webapps.interrupt.sua.auth;
+package org.cru.webapps.workflow.sua.auth;
 
 import edu.yale.its.tp.cas.client.CASReceipt;
 import edu.yale.its.tp.cas.client.filter.CASFilter;

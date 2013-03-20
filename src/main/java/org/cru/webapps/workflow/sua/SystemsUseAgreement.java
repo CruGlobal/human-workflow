@@ -1,7 +1,7 @@
-package org.cru.webapps.interrupt.sua;
+package org.cru.webapps.workflow.sua;
 
 import com.google.gson.Gson;
-import org.cru.webapps.interrupt.sua.auth.SsoGuid;
+import org.cru.webapps.workflow.sua.auth.SsoGuid;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

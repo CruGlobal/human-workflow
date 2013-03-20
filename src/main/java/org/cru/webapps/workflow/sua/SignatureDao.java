@@ -1,6 +1,6 @@
-package org.cru.webapps.interrupt.sua;
+package org.cru.webapps.workflow.sua;
 
-import org.cru.webapps.interrupt.sua.auth.SsoGuid;
+import org.cru.webapps.workflow.sua.auth.SsoGuid;
 
 import javax.ejb.Stateful;
 import javax.inject.Inject;

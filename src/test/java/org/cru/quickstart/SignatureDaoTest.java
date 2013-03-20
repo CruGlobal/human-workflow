@@ -1,9 +1,9 @@
 package org.cru.quickstart;
 
-import org.cru.webapps.interrupt.Resources;
-import org.cru.webapps.interrupt.sua.Signature;
-import org.cru.webapps.interrupt.sua.SignatureDao;
-import org.cru.webapps.interrupt.sua.auth.SsoGuid;
+import org.cru.webapps.workflow.Resources;
+import org.cru.webapps.workflow.sua.Signature;
+import org.cru.webapps.workflow.sua.SignatureDao;
+import org.cru.webapps.workflow.sua.auth.SsoGuid;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -40,21 +40,21 @@ public class SignatureDaoTest extends Arquillian {
     SignatureDao signatureDao;
 
     @Test
-    public void shouldInterrupt() {
+    public void shouldSignSua() {
         final SsoGuid ssoGuid = SsoGuid.valueOf("neverSeenBefore");
 
         Assert.assertTrue(signatureDao.shouldSign(ssoGuid));
     }
 
     @Test
-    public void shouldNotInterrupt() {
+    public void shouldNotSignAgain() {
         final SsoGuid ssoGuid = SsoGuid.valueOf("abc-123");
 
         Assert.assertFalse(signatureDao.shouldSign(ssoGuid));
     }
 
     @Test
-    public void shouldInterruptOld() {
+    public void shouldSignAgain() {
         final SsoGuid ssoGuid = SsoGuid.valueOf("old-987");
 
         Assert.assertTrue(signatureDao.shouldSign(ssoGuid));

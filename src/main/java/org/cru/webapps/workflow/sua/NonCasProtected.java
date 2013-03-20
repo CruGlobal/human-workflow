@@ -1,6 +1,6 @@
-package org.cru.webapps.interrupt.sua;
+package org.cru.webapps.workflow.sua;
 
-import org.cru.webapps.interrupt.sua.auth.SsoGuid;
+import org.cru.webapps.workflow.sua.auth.SsoGuid;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -15,7 +15,7 @@ public class NonCasProtected {
 
     @GET
     @Path("/{ssoGuid}")
-    public boolean shouldInterrupt(@PathParam("ssoGuid") String ssoGuid) {
+    public boolean requireRedirect(@PathParam("ssoGuid") String ssoGuid) {
         //TODO secure with encrypted properties
         return signatureDao.shouldSign(SsoGuid.valueOf(ssoGuid));
     }
