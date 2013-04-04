@@ -3,16 +3,18 @@ package org.cru.webapps.workflow.sua;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import java.util.Date;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 //@UniqueConstraint(columnNames = "ssoGuid")
 public class Signature {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = SEQUENCE, generator = "signature_seq")
+    @SequenceGenerator(name = "signature_seq", sequenceName = "signature_seq")
     private Long id;
     private String ssoGuid;
     private Date dateSigned;
