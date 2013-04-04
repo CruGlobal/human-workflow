@@ -7,7 +7,7 @@ public class SsoGuid {
     private String ssoGuid;
 
     private SsoGuid(String ssoGuid) {
-        this.ssoGuid = ssoGuid;
+        this.ssoGuid = ssoGuid.toLowerCase();
     }
 
     public static SsoGuid valueOf(String ssoGuid) {
