@@ -6,7 +6,7 @@
     <filter>
         <filter-name>CAS Filter</filter-name>
         <filter-class>edu.yale.its.tp.cas.client.filter.CASFilter</filter-class>
-        <init-param>
+        <!--<init-param>
             <param-name>edu.yale.its.tp.cas.client.filter.validateUrl</param-name>
             <param-value>https://signin.cru.org/cas/proxyValidate</param-value>
         </init-param>
@@ -21,7 +21,25 @@
         <init-param>
             <param-name>edu.yale.its.tp.cas.client.filter.logoutCallbackUrl</param-name>
             <param-value>https://signin.cru.org/other/single-logout</param-value>
+        </init-param>-->
+
+        <init-param>
+            <param-name>edu.yale.its.tp.cas.client.filter.validateUrl</param-name>
+            <param-value>http://dlidma01.ccci.org:8081/cas/proxyValidate</param-value>
         </init-param>
+        <init-param>
+            <param-name>edu.yale.its.tp.cas.client.filter.loginUrl</param-name>
+            <param-value>http://dlidma01.ccci.org:8081/cas/login</param-value>
+        </init-param>
+        <init-param>
+            <param-name>edu.yale.its.tp.cas.client.filter.wrapRequest</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>edu.yale.its.tp.cas.client.filter.logoutCallbackUrl</param-name>
+            <param-value>http://dlidma01.ccci.org:8081/other/single-logout</param-value>
+        </init-param>
+
         <!-- this init-param is only needed if you are behind a load balancer (or something that changes the URL) -->
         <!--<init-param>
             <param-name>edu.yale.its.tp.cas.client.filter.serverName</param-name>
