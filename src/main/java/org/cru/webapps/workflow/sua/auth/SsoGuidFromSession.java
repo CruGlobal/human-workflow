@@ -1,5 +1,6 @@
 package org.cru.webapps.workflow.sua.auth;
 
+import com.google.common.base.Preconditions;
 import edu.yale.its.tp.cas.client.CASReceipt;
 import edu.yale.its.tp.cas.client.filter.CASFilter;
 
@@ -7,6 +8,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @RequestScoped
 public class SsoGuidFromSession {
@@ -16,8 +18,11 @@ public class SsoGuidFromSession {
 
     @Produces
     public SsoGuid getSsoGuid() {
-        if (isAuthenticatedViaCas(request))
-            return SsoGuid.valueOf((String) getCasReceipt(request).getAttributes().get("ssoGuid"));
+        if (isAuthenticatedViaCas(request)) {
+            final Map attributes = getCasReceipt(request).getAttributes();
+            Preconditions.checkState(!attributes.keySet().isEmpty(), "CAS Attributes is empty - is this application white listed?");
+            return SsoGuid.valueOf((String) attributes.get("ssoGuid"));
+        }
         else
             throw new RuntimeException("not auth");
     }
