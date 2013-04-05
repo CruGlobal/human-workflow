@@ -6,6 +6,7 @@ import org.cru.webapps.workflow.sua.NonCasProtected;
 import org.cru.webapps.workflow.sua.Signature;
 import org.cru.webapps.workflow.sua.SignatureDao;
 import org.cru.webapps.workflow.sua.auth.SsoGuid;
+import org.cru.webapps.workflow.sua.util.EncryptedProperties;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.resteasy.client.ClientRequest;
@@ -29,9 +30,10 @@ public class CasUnprotectedEndpointTest extends Arquillian {
                 .loadMetadataFromPom("pom.xml");
 
         final String casClientMvn = "org.ccci:casclient-ccci:2.1.0-20120214-SNAPSHOT";
+        final String ccciUtil = "org.ccci:util:3-SNAPSHOT";
         final String guavaMvn = "com.google.guava:guava:10.0.1";
 
-        final Collection<JavaArchive> javaArchives = resolver.artifacts(casClientMvn, guavaMvn)
+        final Collection<JavaArchive> javaArchives = resolver.artifacts(casClientMvn, guavaMvn, ccciUtil)
                 .resolveAs(JavaArchive.class);
 
         return ShrinkWrap.create(WebArchive.class, "non-cas-endpoint.war")
@@ -40,17 +42,24 @@ public class CasUnprotectedEndpointTest extends Arquillian {
                 .addAsWebInfResource("web.xml")
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsResource("import.sql")
+                .addAsResource("default.properties")
                 .addAsLibraries(javaArchives)
-                .addClasses(Resources.class, App.class, NonCasProtected.class, Signature.class, SignatureDao.class, SsoGuid.class);
+                .addClasses(Resources.class,
+                        App.class,
+                        EncryptedProperties.class,
+                        NonCasProtected.class,
+                        Signature.class,
+                        SignatureDao.class,
+                        SsoGuid.class);
     }
 
     @Test
-    public void shouldBeRequiredToRedirect() throws Exception {
+    public void shouldBeBadRequest() throws Exception {
         ClientRequest request = new ClientRequest("http://localhost:8080/non-cas-endpoint/api/non-cas/aoeu");
         request.accept("application/json");
         final ClientResponse<Boolean> response = request.get(Boolean.class);
-        Assert.assertEquals(response.getStatus(), 200);
-
-        Assert.assertTrue(response.getEntity());
+        Assert.assertEquals(response.getStatus(), 400);
     }
+
+
 }
