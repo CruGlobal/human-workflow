@@ -2,6 +2,7 @@ package org.cru.quickstart;
 
 import org.cru.webapps.workflow.App;
 import org.cru.webapps.workflow.Resources;
+import org.cru.webapps.workflow.sua.AYearAgoProducer;
 import org.cru.webapps.workflow.sua.NonCasProtected;
 import org.cru.webapps.workflow.sua.Signature;
 import org.cru.webapps.workflow.sua.SignatureDao;
@@ -58,7 +59,8 @@ public class CasUnprotectedEndpointTest extends Arquillian {
                         NonCasProtected.class,
                         Signature.class,
                         SignatureDao.class,
-                        SsoGuid.class);
+                        SsoGuid.class,
+                        AYearAgoProducer.class);
     }
 
     @Test

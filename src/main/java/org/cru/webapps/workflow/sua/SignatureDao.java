@@ -15,6 +15,9 @@ public class SignatureDao {
     @Inject
     EntityManager em;
 
+    @Inject
+    Date aYearAgo;
+
     public Signature saveSignature(SsoGuid ssoGuid) {
         final Signature signature = new Signature();
 
@@ -27,8 +30,6 @@ public class SignatureDao {
     }
 
     public List<Signature> validSignatures(SsoGuid ssoGuid) {
-        final Calendar date = Calendar.getInstance();
-        date.add(Calendar.YEAR, -1);
 
         final String qlString = "select s from Signature s " +
                 "where s.ssoGuid = :ssoGuid " +
@@ -36,7 +37,7 @@ public class SignatureDao {
                 "and s.dateSigned is not null ";
         return em.createQuery(qlString, Signature.class)
                 .setParameter("ssoGuid", ssoGuid.get())
-                .setParameter("aYearAgo", date.getTime())
+                .setParameter("aYearAgo", aYearAgo)
                 .getResultList();
     }
 

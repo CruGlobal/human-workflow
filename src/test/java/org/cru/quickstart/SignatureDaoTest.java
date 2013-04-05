@@ -1,6 +1,7 @@
 package org.cru.quickstart;
 
 import org.cru.webapps.workflow.Resources;
+import org.cru.webapps.workflow.sua.AYearAgoProducer;
 import org.cru.webapps.workflow.sua.Signature;
 import org.cru.webapps.workflow.sua.SignatureDao;
 import org.cru.webapps.workflow.sua.auth.SsoGuid;
@@ -33,7 +34,7 @@ public class SignatureDaoTest extends Arquillian {
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsResource("import.sql")
                 .addAsLibraries(guava)
-                .addClasses(Resources.class, Signature.class, SignatureDao.class, SsoGuid.class);
+                .addClasses(Resources.class, Signature.class, SignatureDao.class, SsoGuid.class, AYearAgoProducer.class);
     }
 
     @Inject
