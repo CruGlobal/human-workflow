@@ -34,7 +34,7 @@ public class SignatureDaoTest extends Arquillian {
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsResource("import.sql")
                 .addAsLibraries(guava)
-                .addClasses(Resources.class, Signature.class, SignatureDao.class, SsoGuid.class, AYearAgoProducer.class);
+                .addClasses(Resources.class, Signature.class, SignatureDao.class, SsoGuid.class, AYearAgoTestProducer.class);
     }
 
     @Inject

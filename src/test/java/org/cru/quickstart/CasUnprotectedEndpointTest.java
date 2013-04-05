@@ -60,7 +60,7 @@ public class CasUnprotectedEndpointTest extends Arquillian {
                         Signature.class,
                         SignatureDao.class,
                         SsoGuid.class,
-                        AYearAgoProducer.class);
+                        AYearAgoTestProducer.class);
     }
 
     @Test
