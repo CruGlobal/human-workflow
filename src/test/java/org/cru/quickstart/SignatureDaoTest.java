@@ -18,6 +18,9 @@ import org.testng.annotations.Test;
 
 import javax.inject.Inject;
 
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
 public class SignatureDaoTest extends Arquillian {
     @Deployment
     public static WebArchive createTestArchive() {
@@ -34,7 +37,11 @@ public class SignatureDaoTest extends Arquillian {
                 .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                 .addAsResource("import.sql")
                 .addAsLibraries(guava)
-                .addClasses(Resources.class, Signature.class, SignatureDao.class, SsoGuid.class, AYearAgoTestProducer.class);
+                .addClasses(Resources.class,
+                        Signature.class,
+                        SignatureDao.class,
+                        SsoGuid.class,
+                        AYearAgoTestProducer.class);
     }
 
     @Inject
@@ -44,31 +51,31 @@ public class SignatureDaoTest extends Arquillian {
     public void shouldSignSua() {
         final SsoGuid ssoGuid = SsoGuid.valueOf("neverSeenBefore");
 
-        Assert.assertTrue(signatureDao.shouldSign(ssoGuid));
+        assertTrue(signatureDao.shouldSign(ssoGuid));
     }
 
     @Test
     public void shouldNotSignAgain() {
         final SsoGuid ssoGuid = SsoGuid.valueOf("abc-123");
 
-        Assert.assertFalse(signatureDao.shouldSign(ssoGuid));
+        assertFalse(signatureDao.shouldSign(ssoGuid));
     }
 
     @Test
     public void shouldSignAgain() {
         final SsoGuid ssoGuid = SsoGuid.valueOf("old-987");
 
-        Assert.assertTrue(signatureDao.shouldSign(ssoGuid));
+        assertTrue(signatureDao.shouldSign(ssoGuid));
     }
 
     @Test
     public void shouldSaveSignature() throws Exception {
         final SsoGuid ssoGuid = SsoGuid.valueOf("def-456");
 
-        Assert.assertTrue(signatureDao.shouldSign(ssoGuid));
+        assertTrue(signatureDao.shouldSign(ssoGuid));
 
         signatureDao.saveSignature(ssoGuid);
 
-        Assert.assertFalse(signatureDao.shouldSign(ssoGuid));
+        assertFalse(signatureDao.shouldSign(ssoGuid));
     }
 }

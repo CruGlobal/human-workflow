@@ -30,6 +30,8 @@ import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.OK;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class CasUnprotectedEndpointTest extends Arquillian {
     @Deployment
@@ -89,7 +91,7 @@ public class CasUnprotectedEndpointTest extends Arquillian {
         request.header("serverSecret", "pass");
         final ClientResponse<Boolean> response = request.get(Boolean.class);
         assertEquals(response.getStatus(), OK.getStatusCode());
-        assertEquals(response.getEntity(), TRUE);
+        assertTrue(response.getEntity());
     }
 
     @Test
@@ -100,6 +102,6 @@ public class CasUnprotectedEndpointTest extends Arquillian {
         request.header("serverSecret", "pass");
         final ClientResponse<Boolean> response = request.get(Boolean.class);
         assertEquals(response.getStatus(), OK.getStatusCode());
-        assertEquals(response.getEntity(), FALSE);
+        assertFalse(response.getEntity());
     }
 }
