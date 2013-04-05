@@ -72,6 +72,12 @@
             <version>0.1-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.ccci</groupId>
+            <artifactId>util</artifactId>
+            <version>3-SNAPSHOT</version>
+        </dependency>
+
         <!-- Import the APIs that we depend on and are included in JBoss AS 7 -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -132,11 +138,6 @@
             <groupId>org.jboss.spec.javax.servlet</groupId>
             <artifactId>jboss-servlet-api_3.0_spec</artifactId>
             <version>1.0.1.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ccci</groupId>
-            <artifactId>util</artifactId>
-            <version>3-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -264,7 +265,7 @@
                 <dependency>
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-remote</artifactId>
-                    <version>7.1.1.Final</version>
+                    <version>7.2.0.Final</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
@@ -280,7 +281,7 @@
                 <dependency>
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-managed</artifactId>
-                    <version>7.1.1.Final</version>
+                    <version>7.2.0.Final</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
