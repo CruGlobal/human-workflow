@@ -23,7 +23,10 @@ import org.testng.annotations.Test;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import static javax.ws.rs.core.Response.Status.OK;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 import static org.testng.Assert.assertEquals;
 
@@ -66,7 +69,6 @@ public class CasUnprotectedEndpointTest extends Arquillian {
         assertEquals(response.getStatus(), BAD_REQUEST.getStatusCode());
     }
 
-
     @Test
     public void shouldBeUnauthorized() throws Exception {
         ClientRequest request = new ClientRequest("http://localhost:8080/non-cas-endpoint/api/non-cas/aoeu");
@@ -75,5 +77,27 @@ public class CasUnprotectedEndpointTest extends Arquillian {
         request.header("serverSecret", "wrong");
         final ClientResponse<Boolean> response = request.get(Boolean.class);
         assertEquals(response.getStatus(), UNAUTHORIZED.getStatusCode());
+    }
+
+    @Test
+    public void shouldBeRedirected() throws Exception {
+        ClientRequest request = new ClientRequest("http://localhost:8080/non-cas-endpoint/api/non-cas/aoeu");
+        request.accept("application/json");
+        request.header("serverId", "user");
+        request.header("serverSecret", "pass");
+        final ClientResponse<Boolean> response = request.get(Boolean.class);
+        assertEquals(response.getStatus(), OK.getStatusCode());
+        assertEquals(response.getEntity(), TRUE);
+    }
+
+    @Test
+    public void shouldNotBeRedirected() throws Exception {
+        ClientRequest request = new ClientRequest("http://localhost:8080/non-cas-endpoint/api/non-cas/abc-123");
+        request.accept("application/json");
+        request.header("serverId", "user");
+        request.header("serverSecret", "pass");
+        final ClientResponse<Boolean> response = request.get(Boolean.class);
+        assertEquals(response.getStatus(), OK.getStatusCode());
+        assertEquals(response.getEntity(), FALSE);
     }
 }
