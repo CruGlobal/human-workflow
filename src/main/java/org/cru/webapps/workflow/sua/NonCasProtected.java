@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.ws.rs.core.Response.*;
+import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 @Path("non-cas/")
@@ -36,19 +37,27 @@ public class NonCasProtected {
             checkNotNull(secret);
             checkNotNull(ssoGuid);
         } catch (NullPointerException e) {
-            logger.info("*** bad request! ***");
-            ResponseBuilder builder = status(Status.BAD_REQUEST);
-            builder.type("application/json");
-            builder.entity(null);
-            Response response = builder.build();
-            throw new WebApplicationException(response);
+            returnStatus(BAD_REQUEST);
         }
 
-        if (!secret.equals(encryptedProperties.getRequiredProperty("user." + serverId))) {
-            logger.info("*** unauthorized! ***");
-            throw new WebApplicationException(status(UNAUTHORIZED).build());
+        String configuredSecret = null;
+        try {
+            configuredSecret = encryptedProperties.getRequiredProperty("user." + serverId);
+        } catch (IllegalStateException e) {
+            returnStatus(UNAUTHORIZED);
+        }
+        if (!secret.equals(configuredSecret)) {
+            returnStatus(UNAUTHORIZED);
         }
 
         return signatureDao.shouldSign(SsoGuid.valueOf(ssoGuid));
+    }
+
+    private void returnStatus(Status status) throws WebApplicationException {
+        ResponseBuilder builder = status(status);
+        builder.type("application/json");
+        builder.entity(null);
+        Response response = builder.build();
+        throw new WebApplicationException(response);
     }
 }

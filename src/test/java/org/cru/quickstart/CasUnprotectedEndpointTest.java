@@ -20,7 +20,12 @@ import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import javax.ws.rs.core.Response;
 import java.util.Collection;
+
+import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
+import static org.testng.Assert.assertEquals;
 
 public class CasUnprotectedEndpointTest extends Arquillian {
     @Deployment
@@ -58,8 +63,17 @@ public class CasUnprotectedEndpointTest extends Arquillian {
         ClientRequest request = new ClientRequest("http://localhost:8080/non-cas-endpoint/api/non-cas/aoeu");
         request.accept("application/json");
         final ClientResponse<Boolean> response = request.get(Boolean.class);
-        Assert.assertEquals(response.getStatus(), 400);
+        assertEquals(response.getStatus(), BAD_REQUEST.getStatusCode());
     }
 
 
+    @Test
+    public void shouldBeUnauthorized() throws Exception {
+        ClientRequest request = new ClientRequest("http://localhost:8080/non-cas-endpoint/api/non-cas/aoeu");
+        request.accept("application/json");
+        request.header("serverId", "wrong");
+        request.header("serverSecret", "wrong");
+        final ClientResponse<Boolean> response = request.get(Boolean.class);
+        assertEquals(response.getStatus(), UNAUTHORIZED.getStatusCode());
+    }
 }
