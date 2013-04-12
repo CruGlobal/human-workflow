@@ -1,10 +1,12 @@
 package org.cru.webapps.workflow.sua.util;
 
 import com.google.common.base.Preconditions;
+import edu.yale.its.tp.cas.client.filter.CasFilterProperties;
 import org.ccci.util.properties.CcciProperties;
 import org.ccci.util.properties.PropertiesWithFallback;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
@@ -35,5 +37,12 @@ public class EncryptedProperties {
         } catch (MalformedURLException e) {
             throw new RuntimeException("WSDL URL is malformed", e);
         }
+    }
+
+    @Produces
+    @CasFilterProperties
+    public Properties propertiesProducer() {
+        // FUTURE: Deprecate "Encrypted Properties" and just use Properties objects
+        return properties;
     }
 }
