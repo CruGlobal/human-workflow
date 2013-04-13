@@ -3,20 +3,18 @@
   'use strict';
 
   angular.module('human-workflow', ['ngResource'])
-    .config(['$routeProvider', function ($routeProvider) {
-      $routeProvider
-        .when('/systems-use-agreement',
-        {
-          templateUrl:'sua.html',
-          controller:'SuaController'
-        })
-        .otherwise({redirectTo:'/systems-use-agreement'});
-    }])
     .controller('SuaController',
-      ['$scope', '$resource', '$routeParams', '$window',
-        function(scope, resource, routeParams, window) {
+      ['$scope', '$resource', '$window', '$location',
+        function(scope, resource, window, location) {
 
-          scope.returnUrl = routeParams.returnUrl;
+            var absUrl = location.absUrl();
+            var searchString = 'returnUrl=';
+            var start = absUrl.indexOf(searchString) + searchString.length;
+            var length = absUrl.indexOf('&', start) - start;
+            if(length > 0)
+                scope.returnUrl = absUrl.substr(start, length);
+            else
+                scope.returnUrl = absUrl.substr(start);
 
           var userType = resource('api/sua/userType');
 
@@ -46,7 +44,10 @@
           }
 
           var redirectTo = function(url) {
-            window.location = url;
+            if(url.indexOf("%2F") > 0)
+                window.location = decodeURIComponent(url);
+            else
+                window.location = url;
           }
 
         }

@@ -26,12 +26,12 @@
 <![endif]-->
 
 <div class="container" data-ng-app="human-workflow">
-    <div data-ng-view></div>
+    <div data-ng-controller="SuaController" data-ng-include="'sua.html'"></div>
 </div>
 
 <script src="js/vendor/angular.js"></script>
 <script src="js/vendor/angular-resource.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/1.1.1/lodash.min.js"></script>
 
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
