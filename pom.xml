@@ -317,5 +317,59 @@
                 </testResources>
             </build>
         </profile>
+
+        <profile>
+            <id>add-datasource</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>default-test</id>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <skipTests>true</skipTests>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.jboss.as.plugins</groupId>
+                        <artifactId>jboss-as-maven-plugin</artifactId>
+                        <version>7.3.Final</version>
+                        <executions>
+                            <execution>
+                                <id>add-datasource</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>add-resource</goal>
+                                </goals>
+                                <configuration>
+                                    <address>subsystem=datasources,data-source=java:jboss/datasources/HumanWorkflowDS</address>
+                                    <resource>
+                                        <enable-resource>true</enable-resource>
+                                        <properties>
+                                            <jndi-name>java:jboss/datasources/HumanWorkflowDS</jndi-name>
+                                            <enabled>true</enabled>
+                                            <connection-url>jdbc:h2:mem:DB_CLOSE_ON_EXIT=FALSE</connection-url>
+                                            <driver-class>org.h2.Driver</driver-class>
+                                            <driver-name>h2</driver-name>
+                                            <security.user-name>sa</security.user-name>
+                                            <security.password>sa</security.password>
+                                            <pool-name>default</pool-name>
+                                        </properties>
+                                    </resource>
+                                </configuration>
+                            </execution>
+
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>
